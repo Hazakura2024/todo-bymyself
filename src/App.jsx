@@ -19,7 +19,11 @@ export const App = () => {
   //追加ボタンを押したときに呼び出される関数
   //incompleteTodosに入力されたtodoを追加する
   const addIncompleteTodo = () => {
-    
+
+    //何も入力されてないときに空白のtodoが追加されるのを防止
+    if (todoText === "") {
+      return;
+    }
 
     const newtodos = [...incompleteTodos, { id: Date.now(), text: todoText }]
     setIncompleteTodos(newtodos)
