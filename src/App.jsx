@@ -9,6 +9,9 @@ export const App = () => {
   //未完了のtodoを管理するステート
   const [incompleteTodos, setIncompleteTodos] = useState([])
 
+  //完了済のtodoを管理するステート
+  const [completeTodos, setCompleteTodos] = useState([])
+
   //todoの入力欄の文字が変更されたときに呼び出される関数
   //todoに入力された値を変更する
   const onChangeTodoText = (event) => {
