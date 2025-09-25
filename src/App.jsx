@@ -4,17 +4,37 @@ import './App.css'
 export const App = () => {
   
   //入力されているtodoの文章を管理するステート
-  const {todoText , setTodoText} = useState("todoTextの初期値");
+  const [todoText , setTodoText] = useState("");
+
+  //未完了のtodoを管理するステート
+  const [incompleteTodos ,setIncompleteTodos] = useState()
+
+  //todoの入力欄の文字が変更されたときに呼び出される関数
+  //todoに入力された値を変更する
+  const onChangeTodoText = (event) => {
+    setTodoText(event.target.value);
+    
+  }
+
+  //追加ボタンを押したときに呼び出される関数
+  //incompleteTodosに入力されたtodoを追加する
+  const addIncompleteTodo = () => {
+
+    const newtodos = [...incompleteTodos,{id: Date.now(),text: todoText}]
+    setTodoText(newtodos)
+
+  }
 
 
   return (
     <>
       <h1>Todoアプリ</h1>
       <div className='input-area'>
-        <input type="text" placeholder='TODO入力' value={todoText} />
-        <button>追加</button>
+        <input type="text" placeholder='TODO入力' value={todoText} onChange={onChangeTodoText}/>
+        <button onClick={addIncompleteTodo}>追加</button>
       </div>
       <div className='incomplete-area'>
+        <p className='title'>未完了のタスク</p>
         <ul>
           <li>
             <div className='todo-low'>
@@ -26,6 +46,7 @@ export const App = () => {
         </ul>
       </div>
       <div className='complete-area'>
+        <p className='title'>完了済のタスク</p>
         <ul>
           <li>
             <div className='todo-low'>
