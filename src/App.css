@@ -140,17 +140,144 @@ body {
 
 .todo-input {
   flex: 1;
-  padding: 1rem;
-  border: 2px solid var(--border-color);
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+  padding: 1.5rem 1.75rem;
+  border: 3px solid transparent;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
+  min-height: 65px;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(135deg, var(--primary-color), var(--secondary-color)) border-box;
+  box-shadow: 
+    0 4px 20px rgba(102, 126, 234, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  position: relative;
+  color: var(--text-primary);
+}
+
+.todo-input::placeholder {
+  color: var(--text-secondary);
+  font-weight: 400;
+  transition: all 0.3s ease;
+  opacity: 0.7;
 }
 
 .todo-input:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: transparent;
+  background: linear-gradient(white, #fafbff) padding-box,
+              linear-gradient(135deg, var(--primary-color), var(--secondary-color)) border-box;
+  box-shadow: 
+    0 8px 30px rgba(102, 126, 234, 0.25),
+    0 4px 15px rgba(118, 75, 162, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.todo-input:focus::placeholder {
+  opacity: 0.4;
+  transform: translateY(-2px);
+}
+
+.todo-input:hover:not(:focus) {
+  background: linear-gradient(#fafbff, #f8f9ff) padding-box,
+              linear-gradient(135deg, var(--primary-color), var(--secondary-color)) border-box;
+  box-shadow: 
+    0 6px 25px rgba(102, 126, 234, 0.2),
+    0 3px 10px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+}
+
+/* 入力フィールドラッパー */
+.input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.input-wrapper::before {
+  content: '✨';
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.input-wrapper:focus-within::before {
+  opacity: 0.8;
+  transform: translateY(-50%) scale(1.1);
+  color: var(--primary-color);
+}
+
+.input-wrapper .todo-input {
+  padding-left: 3.5rem;
+}
+
+/* アニメーション効果 */
+.todo-input:focus {
+  animation: inputGlow 2s infinite alternate;
+}
+
+@keyframes inputGlow {
+  0% {
+    box-shadow: 
+      0 8px 30px rgba(102, 126, 234, 0.25),
+      0 4px 15px rgba(118, 75, 162, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+  100% {
+    box-shadow: 
+      0 10px 35px rgba(102, 126, 234, 0.3),
+      0 6px 20px rgba(118, 75, 162, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  border-radius: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  min-height: 50px;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .btn {
@@ -330,7 +457,7 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   transition: left 0.5s ease;
 }
 
@@ -765,6 +892,36 @@ body {
   .todo-item {
     text-align: center;
   }
+  
+  button {
+    font-size: 0.8rem;
+    border-radius: 10px;
+  }
+  
+  .input-area button {
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    min-height: 50px;
+    min-width: 100px;
+  }
+  
+  .todo-low button:nth-of-type(1),
+  .todo-low button:nth-of-type(2) {
+    padding: 10px 16px;
+    border-radius: 18px;
+    font-size: 0.85rem;
+    min-height: 40px;
+    min-width: 70px;
+  }
+  
+  .complete-area .todo-low button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    min-height: 40px;
+    min-width: 85px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -781,5 +938,18 @@ body {
   .filter-btn {
     flex: 0 1 auto;
     min-width: 80px;
+  }
+  
+  .todo-input {
+    padding: 1rem 1.25rem;
+    padding-left: 2.75rem;
+    font-size: 0.95rem;
+    min-height: 50px;
+    border-radius: 12px;
+  }
+  
+  .input-wrapper::before {
+    left: 12px;
+    font-size: 0.9rem;
   }
 }
