@@ -21,6 +21,7 @@ export const App = () => {
 
   //追加ボタンを押したときに呼び出される関数
   //incompleteTodosに入力されたtodoを追加する
+  //余談、命名規則を統一したい
   const onCkickAddIncompleteTodo = () => {
 
     //何も入力されてないときに空白のtodoが追加されるのを防止
@@ -71,6 +72,16 @@ export const App = () => {
 
   //戻すボタンが押したときに呼び出される関数
   //completeTodosにボタンを押されたtodoを追加、incompleteTodosからボタンを押されたtodoを削除する
+  const onClickBackCompleteTodo = (index) => {
+
+    const newincompletetodos = [...incompleteTodos, completeTodos[index]]
+    const newcompletetodos = [...completeTodos]
+
+    newcompletetodos.splice(index, 1)
+
+    setIncompleteTodos(newincompletetodos)
+    setCompleteTodos(newcompletetodos)
+  }
 
 
   return (
@@ -115,7 +126,7 @@ export const App = () => {
               <li key={todo.id}>
                 <div className='todo-low'>
                   <p className='todo-item'>{todo.text}</p>
-                  <button>戻す</button>
+                  <button onClick={onClickBackCompleteTodo.bind(null,index)}>戻す</button>
                 </div>
               </li>
 
