@@ -58,6 +58,7 @@ export const App = () => {
 
     //indexではなくidで管理する
     //値ではなく更新関数を渡す
+    //Reactのステート更新関数に値を直接渡す代わりに関数を渡すと、その関数はReactによって特別な引数を受け取ります。
     setIncompleteTodos(incompleteTodos => incompleteTodos.filter((todo) => (todo.id !== id)))
 
 
@@ -79,9 +80,13 @@ export const App = () => {
 
     //idで管理するようにする
 
-    const newCompleteTodos = [...completeTodos, incompleteTodos.filter((todo) => (todo.id === id))]
+    //一度新しい配列を宣言するパターン
+    //incompleteTodos.filter((todo) => (todo.id === id))自体は要素数1の配列、その中身を出すには...構文
+    const newCompleteTodos = [...completeTodos, ...incompleteTodos.filter((todo) => (todo.id === id))]
     
+    //更新関数を直で渡すパターン
     setIncompleteTodos(incompleteTodos => incompleteTodos.filter((todo) => (todo.id !== id)))
+
     setCompleteTodos(newCompleteTodos)
     
 
@@ -90,15 +95,24 @@ export const App = () => {
 
   //戻すボタンが押したときに呼び出される関数
   //completeTodosにボタンを押されたtodoを追加、incompleteTodosからボタンを押されたtodoを削除する
-  const onClickBackCompleteTodo = (index) => {
+  const onClickBackCompleteTodo = (id) => {
 
-    const newIncompleteTodos = [...incompleteTodos, completeTodos[index]]
-    const newCompleteTodos = [...completeTodos]
+    // const newIncompleteTodos = [...incompleteTodos, completeTodos[index]]
+    // const newCompleteTodos = [...completeTodos]
 
-    newCompleteTodos.splice(index, 1)
+    // newCompleteTodos.splice(index, 1)
+
+    // setIncompleteTodos(newIncompleteTodos)
+    // setCompleteTodos(newCompleteTodos)
+
+
+    //idで管理
+    //
+    const newIncompleteTodos = [...incompleteTodos, ...completeTodos.filter((todo) => (todo.id === id))]
+
+    setCompleteTodos(completeTodos => completeTodos.filter((todo) => (todo.id !== id)))
 
     setIncompleteTodos(newIncompleteTodos)
-    setCompleteTodos(newCompleteTodos)
   }
 
   const isMaxTodoLimit = incompleteTodos.length >= 5;
