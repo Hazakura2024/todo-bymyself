@@ -55,6 +55,9 @@ export const App = () => {
 
     // setIncompleteTodos(newTodos)
 
+
+    //indexではなくidで管理する
+    //値ではなく更新関数を渡す
     setIncompleteTodos(incompleteTodos => incompleteTodos.filter((todo) => (todo.id !== id)))
 
 
@@ -63,17 +66,24 @@ export const App = () => {
 
   //完了ボタンを押したときに呼び出される関数
   //completeTodosにボタンを押されたtodoを追加、incompleteTodosからボタンを押されたtodoを削除する
-  const onClickCompleteIncompleteTodo = (index) => {
+  const onClickCompleteIncompleteTodo = (id) => {
     // alert()
 
-    const newIncompleteTodos = [...incompleteTodos]
-    const newCompleteTodos = [...completeTodos, incompleteTodos[index]]
+    // const newIncompleteTodos = [...incompleteTodos]
+    // const newCompleteTodos = [...completeTodos, incompleteTodos[index]]
 
-    newIncompleteTodos.splice(index, 1)
+    // newIncompleteTodos.splice(index, 1)
 
-    setIncompleteTodos(newIncompleteTodos)
+    // setIncompleteTodos(newIncompleteTodos)
+    // setCompleteTodos(newCompleteTodos)
+
+    //idで管理するようにする
+
+    const newCompleteTodos = [...completeTodos, incompleteTodos.filter((todo) => (todo.id === id))]
+    
+    setIncompleteTodos(incompleteTodos => incompleteTodos.filter((todo) => (todo.id !== id)))
     setCompleteTodos(newCompleteTodos)
-
+    
 
   }
 
