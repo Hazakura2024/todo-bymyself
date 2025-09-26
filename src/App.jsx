@@ -25,7 +25,7 @@ export const App = () => {
   //追加ボタンを押したときに呼び出される関数
   //incompleteTodosに入力されたtodoを追加する
   //余談、命名規則を統一したい
-  const onCkickAddIncompleteTodo = () => {
+  const onClickAddIncompleteTodo = () => {
 
     //何も入力されてないときに空白のtodoが追加されるのを防止
     if (todoText === "") {
@@ -93,7 +93,7 @@ export const App = () => {
     <>
       <div className='todo-app'>
         <h1 className='main-title'>Todoアプリ</h1>
-        <InputTodo todoText={todoText} onChangeTodoText={onChangeTodoText} onCkickAddIncompleteTodo={onCkickAddIncompleteTodo} isMaxTodoLimit={isMaxTodoLimit} />
+        <InputTodo todoText={todoText} onChangeTodoText={onChangeTodoText} onClickAddIncompleteTodo={onClickAddIncompleteTodo} isMaxTodoLimit={isMaxTodoLimit} />
         {/* 未完了のタスクの数の上限5個に設定 */}
         {isMaxTodoLimit && <h2 style={{textAlign: 'center',color: 'white'}}>追加できる未完了のタスクは5個までです！</h2>}
         <br />
