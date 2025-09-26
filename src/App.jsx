@@ -9,11 +9,14 @@ export const App = () => {
   //入力されているtodoの文章を管理するステート
   const [todoText, setTodoText] = useState("");
 
-  //未完了のtodoを管理するステート
-  const [incompleteTodos, setIncompleteTodos] = useState([])
+  // //未完了のtodoを管理するステート
+  // const [incompleteTodos, setIncompleteTodos] = useState([])
 
-  //完了済のtodoを管理するステート
-  const [completeTodos, setCompleteTodos] = useState([])
+  // //完了済のtodoを管理するステート
+  // const [completeTodos, setCompleteTodos] = useState([])
+
+  //TODOを管理するステートを一つに統一
+  const [todos, setTodos] = useState([])
 
   //todoの入力欄の文字が変更されたときに呼び出される関数
   //todoに入力された値を変更する
@@ -34,8 +37,8 @@ export const App = () => {
 
     //incompleteTodo配列に追加
     //todoのidには時刻を指定
-    const newTodos = [...incompleteTodos, { id: Date.now(), text: todoText }]
-    setIncompleteTodos(newTodos)
+    const newTodos = [...todos, { id: Date.now(), status: 'incomplete', text: todoText }]
+    setTodos(newTodos)
 
     //入力欄をクリア
     setTodoText("")
@@ -59,7 +62,7 @@ export const App = () => {
     //indexではなくidで管理する
     //値ではなく更新関数を渡す
     //Reactのステート更新関数に値を直接渡す代わりに関数を渡すと、その関数はReactによって特別な引数を受け取ります。
-    setIncompleteTodos(incompleteTodos => incompleteTodos.filter((todo) => (todo.id !== id)))
+    setTodos(todos => todos.filter((todo) => (todo.id !== id)))
 
 
   }
@@ -80,16 +83,22 @@ export const App = () => {
 
     //idで管理するようにする
 
-    //一度新しい配列を宣言するパターン
-    //incompleteTodos.filter((todo) => (todo.id === id))自体は要素数1の配列、その中身を出すには...構文
-    const newCompleteTodos = [...completeTodos, ...incompleteTodos.filter((todo) => (todo.id === id))]
-    
-    //更新関数を直で渡すパターン
-    setIncompleteTodos(incompleteTodos => incompleteTodos.filter((todo) => (todo.id !== id)))
+    // //一度新しい配列を宣言するパターン
+    // //incompleteTodos.filter((todo) => (todo.id === id))自体は要素数1の配列、その中身を出すには...構文
+    // const newCompleteTodos = [...completeTodos, ...incompleteTodos.filter((todo) => (todo.id === id))]
 
-    setCompleteTodos(newCompleteTodos)
-    
+    // //更新関数を直で渡すパターン
+    // setIncompleteTodos(incompleteTodos => incompleteTodos.filter((todo) => (todo.id !== id)))
 
+    // setCompleteTodos(newCompleteTodos)
+
+    setTodos(todos => todos.map((todo) => {
+      if (todo.id === id) {
+        return {id: todo.id, status: "complete", text: todo.text}
+      } else {
+        return todo
+      }
+    }))
   }
 
 
@@ -108,14 +117,22 @@ export const App = () => {
 
     //idで管理
     //
-    const newIncompleteTodos = [...incompleteTodos, ...completeTodos.filter((todo) => (todo.id === id))]
+    // const newIncompleteTodos = [...incompleteTodos, ...completeTodos.filter((todo) => (todo.id === id))]
 
-    setCompleteTodos(completeTodos => completeTodos.filter((todo) => (todo.id !== id)))
+    // setCompleteTodos(completeTodos => completeTodos.filter((todo) => (todo.id !== id)))
 
-    setIncompleteTodos(newIncompleteTodos)
+    // setIncompleteTodos(newIncompleteTodos)
+    setTodos(todos => todos.map((todo) => {
+      if (todo.id === id) {
+        todo.status = "incomplete"
+        return todo
+      } else {
+        return todo
+      }
+    }))
   }
 
-  const isMaxTodoLimit = incompleteTodos.length >= 5;
+  const isMaxTodoLimit = todos.filter(todo => todo.status === "incomplete").length >= 5;
 
   return (
     <>
@@ -123,10 +140,10 @@ export const App = () => {
         <h1 className='main-title'>Todoアプリ</h1>
         <InputTodo todoText={todoText} onChangeTodoText={onChangeTodoText} onClickAddIncompleteTodo={onClickAddIncompleteTodo} isMaxTodoLimit={isMaxTodoLimit} />
         {/* 未完了のタスクの数の上限5個に設定 */}
-        {isMaxTodoLimit && <h2 style={{textAlign: 'center',color: 'white'}}>追加できる未完了のタスクは5個までです!</h2>}
+        {isMaxTodoLimit && <h2 style={{ textAlign: 'center', color: 'white' }}>追加できる未完了のタスクは5個までです!</h2>}
         <br />
-        <IncompleteTodo incompleteTodos={incompleteTodos} onClickCompleteIncompleteTodo={onClickCompleteIncompleteTodo} onClickDeleteIncompleteTodo={onClickDeleteIncompleteTodo} />
-        <CompleteTodo completeTodos={completeTodos} onClickBackCompleteTodo={onClickBackCompleteTodo} />
+        <IncompleteTodo todos={todos} onClickCompleteIncompleteTodo={onClickCompleteIncompleteTodo} onClickDeleteIncompleteTodo={onClickDeleteIncompleteTodo} />
+        <CompleteTodo todos={todos} onClickBackCompleteTodo={onClickBackCompleteTodo} />
       </div>
     </>
   )

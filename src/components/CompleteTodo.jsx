@@ -1,4 +1,4 @@
-export const CompleteTodo = ({completeTodos, onClickBackCompleteTodo}) => {
+export const CompleteTodo = ({todos, onClickBackCompleteTodo}) => {
     return (
         <div className='complete-area'>
             <p className='title'>完了済のタスク</p>
@@ -9,7 +9,7 @@ export const CompleteTodo = ({completeTodos, onClickBackCompleteTodo}) => {
               <button>戻す</button>
             </div>
           </li> */}
-                {completeTodos.map((todo) => (
+                {todos.filter(todo => todo.status === 'complete').map((todo) => (
                     <li key={todo.id}>
                         <div className='todo-low'>
                             <p className='todo-item'>{todo.text}</p>

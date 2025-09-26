@@ -1,4 +1,4 @@
-export const IncompleteTodo = ({incompleteTodos, onClickCompleteIncompleteTodo, onClickDeleteIncompleteTodo}) => {
+export const IncompleteTodo = ({ todos, onClickCompleteIncompleteTodo, onClickDeleteIncompleteTodo }) => {
     return (
         <div className='incomplete-area'>
             <p className='title'>未完了のタスク</p>
@@ -10,7 +10,7 @@ export const IncompleteTodo = ({incompleteTodos, onClickCompleteIncompleteTodo, 
               <button>削除</button>
             </div>
           </li> */}
-                {incompleteTodos.map((todo) => (
+                {todos.filter(todo => todo.status === 'incomplete').map((todo) => (
                     <li key={todo.id}>
                         <div className='todo-low'>
                             <p className='todo-item'>{todo.text}</p>
