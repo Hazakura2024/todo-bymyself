@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import { InputTodo } from './conponent/InputTodo';
-import { IncompleteTodo } from './conponent/IncompleteTodo';
-import { CompleteTodo } from './conponent/CompleteTodo';
+import { InputTodo } from './components/InputTodo';
+import { IncompleteTodo } from './components/IncompleteTodo';
+import { CompleteTodo } from './components/CompleteTodo';
 
 export const App = () => {
 
