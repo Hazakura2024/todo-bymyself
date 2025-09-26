@@ -34,8 +34,8 @@ export const App = () => {
 
     //incompleteTodo配列に追加
     //todoのidには時刻を指定
-    const newtodos = [...incompleteTodos, { id: Date.now(), text: todoText }]
-    setIncompleteTodos(newtodos)
+    const newTodos = [...incompleteTodos, { id: Date.now(), text: todoText }]
+    setIncompleteTodos(newTodos)
 
     //入力欄をクリア
     setTodoText("")
@@ -49,11 +49,11 @@ export const App = () => {
 
     // alert();
 
-    const newtodos = [...incompleteTodos]
+    const newTodos = [...incompleteTodos]
 
-    newtodos.splice(index, 1)
+    newTodos.splice(index, 1)
 
-    setIncompleteTodos(newtodos)
+    setIncompleteTodos(newTodos)
   }
 
 
@@ -62,13 +62,13 @@ export const App = () => {
   const onClickCompleteIncompleteTodo = (index) => {
     // alert()
 
-    const newincompletetodos = [...incompleteTodos]
-    const newcompletetodos = [...completeTodos, incompleteTodos[index]]
+    const newIncompleteTodos = [...incompleteTodos]
+    const newCompleteTodos = [...completeTodos, incompleteTodos[index]]
 
-    newincompletetodos.splice(index, 1)
+    newIncompleteTodos.splice(index, 1)
 
-    setIncompleteTodos(newincompletetodos)
-    setCompleteTodos(newcompletetodos)
+    setIncompleteTodos(newIncompleteTodos)
+    setCompleteTodos(newCompleteTodos)
 
 
   }
@@ -78,13 +78,13 @@ export const App = () => {
   //completeTodosにボタンを押されたtodoを追加、incompleteTodosからボタンを押されたtodoを削除する
   const onClickBackCompleteTodo = (index) => {
 
-    const newincompletetodos = [...incompleteTodos, completeTodos[index]]
-    const newcompletetodos = [...completeTodos]
+    const newIncompleteTodos = [...incompleteTodos, completeTodos[index]]
+    const newCompleteTodos = [...completeTodos]
 
-    newcompletetodos.splice(index, 1)
+    newCompleteTodos.splice(index, 1)
 
-    setIncompleteTodos(newincompletetodos)
-    setCompleteTodos(newcompletetodos)
+    setIncompleteTodos(newIncompleteTodos)
+    setCompleteTodos(newCompleteTodos)
   }
 
   const isMaxTodoLimit = incompleteTodos.length >= 5;
@@ -95,7 +95,7 @@ export const App = () => {
         <h1 className='main-title'>Todoアプリ</h1>
         <InputTodo todoText={todoText} onChangeTodoText={onChangeTodoText} onClickAddIncompleteTodo={onClickAddIncompleteTodo} isMaxTodoLimit={isMaxTodoLimit} />
         {/* 未完了のタスクの数の上限5個に設定 */}
-        {isMaxTodoLimit && <h2 style={{textAlign: 'center',color: 'white'}}>追加できる未完了のタスクは5個までです！</h2>}
+        {isMaxTodoLimit && <h2 style={{textAlign: 'center',color: 'white'}}>追加できる未完了のタスクは5個までです!</h2>}
         <br />
         <IncompleteTodo incompleteTodos={incompleteTodos} onClickCompleteIncompleteTodo={onClickCompleteIncompleteTodo} onClickDeleteIncompleteTodo={onClickDeleteIncompleteTodo} />
         <CompleteTodo completeTodos={completeTodos} onClickBackCompleteTodo={onClickBackCompleteTodo} />
