@@ -45,15 +45,19 @@ export const App = () => {
 
   //削除ボタンを押したときに呼び出される関数
   //incompleteTodosからボタンを押されたtodoを削除する
-  const onClickDeleteIncompleteTodo = (index) => {
+  const onClickDeleteIncompleteTodo = (id) => {
 
     // alert();
 
-    const newTodos = [...incompleteTodos]
+    // const newTodos = [...incompleteTodos]
 
-    newTodos.splice(index, 1)
+    // newTodos.splice(index, 1)
 
-    setIncompleteTodos(newTodos)
+    // setIncompleteTodos(newTodos)
+
+    setIncompleteTodos(incompleteTodos => incompleteTodos.filter((todo) => (todo.id !== id)))
+
+
   }
 
 

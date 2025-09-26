@@ -9,11 +9,11 @@ export const CompleteTodo = ({completeTodos, onClickBackCompleteTodo}) => {
               <button>戻す</button>
             </div>
           </li> */}
-                {completeTodos.map((todo, index) => (
+                {completeTodos.map((todo) => (
                     <li key={todo.id}>
                         <div className='todo-low'>
                             <p className='todo-item'>{todo.text}</p>
-                            <button onClick={onClickBackCompleteTodo.bind(null, index)}>戻す</button>
+                            <button onClick={onClickBackCompleteTodo.bind(null, todo.id)}>戻す</button>
                         </div>
                     </li>
 
