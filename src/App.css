@@ -899,7 +899,7 @@ button:active {
   }
   
   button {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     border-radius: 8px;
     min-height: 36px;
   }
@@ -907,7 +907,7 @@ button:active {
   .input-area button {
     padding: 12px 20px;
     border-radius: 25px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     min-height: 50px;
     min-width: 90px;
   }
@@ -916,7 +916,7 @@ button:active {
   .todo-low button:nth-of-type(2) {
     padding: 8px 12px;
     border-radius: 15px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     min-height: 36px;
     min-width: 60px;
     flex-shrink: 0;
@@ -925,7 +925,7 @@ button:active {
   .complete-area .todo-low button {
     padding: 8px 16px;
     border-radius: 18px;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     min-height: 36px;
     min-width: 70px;
     flex-shrink: 0;
@@ -988,19 +988,19 @@ button:active {
     padding: 6px 8px;
     min-width: 50px;
     min-height: 32px;
-    font-size: 0.65rem;
+    font-size: 0.75rem;
   }
   
   .complete-area .todo-low button {
     padding: 6px 12px;
     min-width: 60px;
     min-height: 32px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
   
   .input-area button {
     padding: 10px 16px;
     min-width: 80px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 }
