@@ -87,13 +87,16 @@ export const App = () => {
     setCompleteTodos(newcompletetodos)
   }
 
+  const isMaxTodoLimit = incompleteTodos.length >= 5;
 
   return (
     <>
       <div className='todo-app'>
         <h1 className='main-title'>Todoアプリ</h1>
-        <InputTodo todoText={todoText} onChangeTodoText={onChangeTodoText} onCkickAddIncompleteTodo={onCkickAddIncompleteTodo} />
-        
+        <InputTodo todoText={todoText} onChangeTodoText={onChangeTodoText} onCkickAddIncompleteTodo={onCkickAddIncompleteTodo} isMaxTodoLimit={isMaxTodoLimit} />
+        {/* 未完了のタスクの数の上限5個に設定 */}
+        {isMaxTodoLimit && <h2 style={{textAlign: 'center',color: 'white'}}>追加できる未完了のタスクは5個までです！</h2>}
+        <br />
         <IncompleteTodo incompleteTodos={incompleteTodos} onClickCompleteIncompleteTodo={onClickCompleteIncompleteTodo} onClickDeleteIncompleteTodo={onClickDeleteIncompleteTodo} />
         <CompleteTodo completeTodos={completeTodos} onClickBackCompleteTodo={onClickBackCompleteTodo} />
       </div>
