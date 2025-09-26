@@ -124,8 +124,7 @@ export const App = () => {
     // setIncompleteTodos(newIncompleteTodos)
     setTodos(todos => todos.map((todo) => {
       if (todo.id === id) {
-        todo.status = "incomplete"
-        return todo
+        return {id: todo.id, status: "incomplete", text: todo.text}
       } else {
         return todo
       }
