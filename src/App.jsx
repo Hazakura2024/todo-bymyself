@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { InputTodo } from './conponent/InputTodo';
+import { IncompleteTodo } from './conponent/IncompleteTodo';
 
 export const App = () => {
 
@@ -91,27 +92,7 @@ export const App = () => {
       <div className='todo-app'>
         <h1 className='main-title'>Todoアプリ</h1>
         <InputTodo todoText={todoText} onChangeTodoText={onChangeTodoText} onCkickAddIncompleteTodo={onCkickAddIncompleteTodo} />
-        <div className='incomplete-area'>
-          <p className='title'>未完了のタスク</p>
-          <ul>
-            {/* <li>
-            <div className='todo-low'>
-              <p className='todo-item'>todo1</p>
-              <button>完了</button>
-              <button>削除</button>
-            </div>
-          </li> */}
-            {incompleteTodos.map((todo, index) => (
-              <li key={todo.id}>
-                <div className='todo-low'>
-                  <p className='todo-item'>{todo.text}</p>
-                  <button onClick={onClickCompleteIncompleteTodo.bind(null, index)}>完了</button>
-                  <button onClick={onClickDeleteIncompleteTodo.bind(null, index)}>削除</button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <IncompleteTodo incompleteTodos={incompleteTodos} onClickCompleteIncompleteTodo={onClickCompleteIncompleteTodo} onClickDeleteIncompleteTodo={onClickDeleteIncompleteTodo} />
         <div className='complete-area'>
           <p className='title'>完了済のタスク</p>
           <ul>
