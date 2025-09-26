@@ -1,5 +1,6 @@
 import { useState } from 'react'
-// import './App.css'
+import './App.css'
+import { InputTodo } from './conponent/InputTodo';
 
 export const App = () => {
 
@@ -30,6 +31,7 @@ export const App = () => {
     }
 
     //incompleteTodo配列に追加
+    //todoのidには時刻を指定
     const newtodos = [...incompleteTodos, { id: Date.now(), text: todoText }]
     setIncompleteTodos(newtodos)
 
@@ -88,10 +90,7 @@ export const App = () => {
     <>
       <div className='todo-app'>
         <h1 className='main-title'>Todoアプリ</h1>
-        <div className='input-area'>
-          <input type="text" placeholder='TODO入力' value={todoText} onChange={onChangeTodoText} />
-          <button onClick={onCkickAddIncompleteTodo}>追加</button>
-        </div>
+        <InputTodo todoText={todoText} onChangeTodoText={onChangeTodoText} onCkickAddIncompleteTodo={onCkickAddIncompleteTodo} />
         <div className='incomplete-area'>
           <p className='title'>未完了のタスク</p>
           <ul>
